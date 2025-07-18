@@ -175,6 +175,19 @@ def setup_member(mydb, engine):
     print("Setup Completed")
 
 
+def setup_store(mydb, engine):
+    print("# store: ", end="")
+    cursor = mydb.cursor()
+    cursor.execute("CREATE TABLE store (store_id INT PRIMARY KEY, city VARCHAR(255), email VARCHAR(255))")
+    mydb.commit()
+    cursor.close()
+
+    store_df = pd.DataFrame({'store_id': [1, 2, 3], 'city': ['Mumbai', 'Bangalore', 'Delhi'],
+                             'email': ['store.mumbai@email.com', 'store.bangalore@email.com', 'store.delhi@email.com']})
+
+    store_df.to_sql(name='store', con=engine, if_exists='append', index=False)
+
+
 def main():
     mydb = connection.get_db()
     engine = connection.get_engine()
