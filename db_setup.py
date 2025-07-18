@@ -198,6 +198,8 @@ def main():
     setup_tran_hdr(mydb, engine)
     print("Setup Complete")
 
+    connection.close_db(mydb)
+
 
 if __name__ == '__main__':
     main()
